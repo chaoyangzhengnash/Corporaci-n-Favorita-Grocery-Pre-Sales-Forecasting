@@ -61,6 +61,8 @@ Further, we will clearly introduce the main models or algorithms we used.
 ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/3.png
  "Optional title")
  
+ Graph: Flow chart of models
+ 
 ### 4.2 Benchmark model: nearest neighborhood 
 Nearest neighbor search (NNS), as a form of proximity search, is the optimization problem of finding the point in a given set that is closest (or most similar) to a given point. Closeness is typically expressed in terms of a dissimilarity function: the less similar the objects, the larger the function values. NNS was used as benchmark in our project to make comparison with other models. 
  
