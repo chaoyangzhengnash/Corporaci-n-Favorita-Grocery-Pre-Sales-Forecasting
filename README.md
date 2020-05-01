@@ -45,6 +45,7 @@ The supplementary features data included several features related to the daily i
 
 ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/2.png
  "Optional title")
+ 
 Table: Usage of features selected for this project
  
 ## 4. Proposed model description 
@@ -73,7 +74,7 @@ We import hamming distance from scipy.spatial. The Hamming distance between 1-D 
 ### 4.3 Step1 Clustering  
 This project starts from implementing clustering method to assign “items + stores” into multiple clusters.  The models selected is K-means clustering with one hot encoding and K-modes. Since we are doing a real-life clustering, some variables may have stronger impacts to build cluster, therefore selected features for clustering should be weighted. Based on the official data description, all variables are equally weighted, except for features: perishable and locations of stores (both states and cities), which are assigned with higher weights. 
  
-####### Clustering Model 1:  K-means clustering with one hot encoding 
+###### Clustering Model 1:  K-means clustering with one hot encoding 
 The standard k-means algorithm isn't directly applicable to categorical data, for various reasons. The sample space for categorical data is discrete, and doesn't have a natural origin. A Euclidean distance function on such a space isn't really meaningful. Thus, our first model for cluttering is: K-means clustering with one hot encoding, which convert categorical attributes to binary values, and then doing k-means as if these were numeric values. 
  
 We use the elbow plot to choose the optimal K in the proposed K-Means model.  
@@ -111,6 +112,8 @@ As it’s difficult to found the optimal value of K in K-modes, we select K = 10
  ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/7.png
  "Optional title")
  
+ Table: Forecasting models' performance
+
 The result of NNS: After clustering all items in the CorporaciónFavorita Grocery, we choose the item of 
 item_nbr:1083152 sold in 40 store as our target item, namely our test data. Then we ran the code of loop in hamming distance and found the item of item_nbr:164088 sold in 40 store has the smallest hamming distance 0.111 with the target item: 1083152, which means this item is most similar to our target item. Thus, we can predict the sale of our target item through assigning the value of the similar item to it. Finally, we calculate the mean square error in the test dataset and the value is 24288. 
  
