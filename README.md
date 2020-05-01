@@ -1,1 +1,33 @@
 # Corporacion-Favorita-Grocery-Pre-Sales-Forecasting
+## 1. Project question 
+In a competitive business environment, companies always want to increase sales and improve customer service by better preparation of their products. Usually companies forecast the future demand based on historical sales data, and then coordinate each department to meet predicted demand. However, companies can’t always be in such cases, especially when they are going to release a new product into the market. It is impossible to forecast demand with the traditional ways.  
+
+In our example, Favorita Grocery runs multiple grocery stores. We plan to forecast the demand for a specific item in a specific store before sales season in month level, which helps the specific store to determine the amount of item in advance, therefore, to reduce the rate of out of stock and increase the revenue and customer satisfaction. We choose forecasting in month level because it will be much more practical than in daily level. 
+ 
+## 2. Literature Review: 
+### 2.1 A comparative study on the forecast of fresh food sales. 
+With the changing of the structure of society and households, the way fresh food is sold in the market is rapidly changing. Freshness and rapid speed of turnover are important consideration. Fresh food is characterized by two factors: its short shelf-life and its importance as a revenue producer for convenience stores. Reliable prediction of sales is of immense benefit to a business because it can improve the quality of the business strategy and decrease costs due to waste, thereby increasing profit(Wan-I Lee et al. 2012). 
+ 
+This paper focus on making this type of prediction with different forecasting sales models, such as Logistic Regression, a good choice for binary data, the Moving Averagemethod, a good way for simple prediction, and the Back-Propagation Neural Networkmethod, a good selection for long term data(Wan-I Lee et al. 2012). 
+ 
+Taiwan’s Hi-Life convenience store chain is selected as the research subject in this paper. The ordering cycle is defined as daily and the sales data included number of sales and amount of fresh food discarded. Furthermore, the information of weather data, holidays, marketing actions, promotions, fashion, and economic environment can be used as explanatory variables. Besides authors used the correct forecast percentage and define error in the correct percentage as the incorrect percentage to calculate the error(Wan-I Lee et al. 2012). 
+ 
+The result in this paper indicates that the correct percentage obtained by LR to be better than that obtained by the BPNN and MA models. After reading this paper, we select four different models in our project: Nearest Neighborhood, Linear Regression, Neural Network. 
+ 
+### 2.2 The use of analogies in forecasting the annual sales of new electronics products. 
+Forecasting the sales of products that have yet to be launched is an important problem for companies. In particular, forecasts of the future values of sales time series (e.g. sales in each of the first n years of a product’s life) will guide decisions relating to future production capacity, marketing budgets, human resource planning and research and development. These forecasts can also be used to estimate the discounted future returns on the investment that will be needed to develop and market the new product. (Goodwin et al. 2013) 
+ 
+In this paper, Bass model was used to describe the sales and adoption patterns of products in the years following their launch and one of the most popular of these models. However, using this model to forecast sales time series for new products is problematical because there is no historic time series data with which to estimate the model’s parameters. Thus, the authors used analogies to estimate parameters for the bass model, which means fitting the model to the sales time series of analogous products that have been launched in an earlier time period and to assume that the parameter values identified for the analogy are applicable to the new product(Goodwin et al. 2013). 
+ 
+The result indicates that all of the methods tended to lead to forecasts with high absolute percentage errors, which is consistent with other studies of new product sales forecasting. The use of the means of published parameter values for analogies led to higher errors than the parameters estimated from the data (Goodwin et al. 2013). This paper gave us the idea to build a model that more accurately forecasts the demand of items before sales according to the known sales of the same category items and help the stores stock the amountof items accurately. 
+ 
+## 2.3 Analogue-based demand forecasting of short life-cycle products: a regression approach and a comprehensive assessment 
+For short life-cycle products, they increased companies’ competitions, but their demands were also difficult to forecast due to high variability in demand and scarcity in historical sales data.Authors aimed to solve the forecast problemby using the time series of similar products. 
+ 
+The authors designed data set X with N time series of analogous products, and the length of each time series is greater than or equal to t time periods. They also assume each time series has AR relationship. Authors divided the whole forecast process into two parts. In the first part, authors determined the hyper parameter, such as the number of clusters and the number of lags in AR regression, then did clustering and obtained the MLR coefficients by minimizing the least squares problem weighted by the fuzzy weights for each cluster. In the second part, authors calculated the regression estimate demand in time period t of the current time series for each cluster with the obtained coefficients. Then they assigned the current time series to the cluster with the smallest distance measure. Based on the choice, they calculated the final forecast for time period t.  
+ 
+With various experiments, this algorithm achievedmore accurateforecasts with short processing times compared with state-of-the-art methods. Those results also revealed that the combination of clustering and regression is a simple and eﬀective forecasting toolsfor supporting replenishment decisions for SLCP. 
+
+## 3. Data description feature engineering  
+The data comes in the shape of multiple files, while in generally, they can be divided into 2 parts: The main sales data andsupplementary features data.  
+Themain sales data essentially contains the sales by date, store, and item.In our project, to reduce training complexity and increase the prediction accuracy, we aggregate the daily item unit sales to monthly item unit sales, byitemid and store id.
