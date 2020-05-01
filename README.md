@@ -35,11 +35,14 @@ With various experiments, this algorithm achievedmore accurateforecasts with sho
 ## 3. Data description feature engineering  
 The data comes in the shape of multiple files, while in generally, they can be divided into 2 parts: The main sales data andsupplementary features data.  
 Themain sales data essentially contains the sales by date, store, and item.In our project, to reduce training complexity and increase the prediction accuracy, we aggregate the daily item unit sales to monthly item unit sales, byitemid and store id.
+
 ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/1.png
  "Optional title")
+
 Plot: Boxplot for the average monthly sales of items among stores (Please noted that each point is the average monthly sales of one item in a specific store) 
 
 The supplementary features data included several features related to the daily item sales among stores. In generally, those features come from 4 dataset: Store, Items, Holidays & Events and Transactions. All features are merged with our main sales data (monthly), through either dates, stores number oritems number. The table below shows the usage of features selected for this project. 
+
 ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/2.png
  "Optional title")
  
@@ -52,6 +55,7 @@ We first apply clustering to select one or multiple products based on similarity
 There are two noticeable point in our algorithm. First, we use the unchangeable features to cluster and select similar products, which is easy to apply and needs less effort to do market research. The second point is that we consider more features, such as promotion, holidays and so on, to fit the model and forecast. 
 
 Further, we will clearly introduce the main models or algorithms we used. 
+
 ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/2.png
  "Optional title")
  
@@ -72,13 +76,15 @@ This project starts from implementing clustering method to assign “items + sto
 The standard k-means algorithm isn't directly applicable to categorical data, for various reasons. The sample space for categorical data is discrete, and doesn't have a natural origin. A Euclidean distance function on such a space isn't really meaningful. Thus, our first model for cluttering is: K-means clustering with one hot encoding, which convert categorical attributes to binary values, and then doing k-means as if these were numeric values. 
  
 We use the elbow plot to choose the optimal K in the proposed K-Means model.  
+
  ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/3.png
  "Optional title")
  
 The above graph show that the “elbow” method does not work quite well in our data, and a rather smooth curve was observed, while the optimal value of K is unclear. However we may still notice that there is “big jump” in the “sun of squared distance” (though not very significant) when the value of k equals to 10, hence we select 10 as our optimal number of cluster. 
  
-####### Clustering Model 2:  K-modes 
+###### Clustering Model 2:  K-modes 
 The K-modes model with a section on "k-prototypes" make it an ideal model to be applied to data with a mix of categorical and numeric features. It uses a distance measure which mixes the Hamming distance for categorical features and the Euclidean distance for numeric features. 
+
   ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/4.png
  "Optional title")
  
@@ -87,21 +93,23 @@ Similar to the result of K-means model, the “elbow method” also works not so
 ### 4.4 Step2 Forecasting 
 Based on the results of clutering, we plan to use two easily used models- linear regression and neuron network. 
 
-####### Forecasting Model1: Linear regression 
+###### Forecasting Model1: Linear regression 
 Linear regression is the most commonly used algorithm. With it, we want to model the linear relationship between response variable (unit_sales) and multiple explanatory variables, such as holiday, promotion, item_perishable and so on. According to the criteria of least squard error, We got estimated values of parameters for the fitted model. Furthermore, we applied the model to do forecast with the new values of explanatory variables of the target product. 
  
-####### Forecasting Model2: Neural network 
+###### Forecasting Model2: Neural network 
 Unlike linear regression, by neural network we want to model the non-linear relationship between response variable (unit_sales) and multiple explanatory variables. According to knowledge, we need to tune various hyperparameters first, such as the number of hidden layers, the number of neurons in each hidden layer and the activation functions. We use for loop to test different combination of hyperparameters and choose values or setting based on the best value in validation set. 
  
 ### 5. Model comparison 
 ### 5.1 Clustering model comparison: 
-As it’s difficult to found the optimal value of K in K-modes, we select K = 10 for K-modes to make its results comparable to K-means. The sum of squared distances of those two models can be seen from the table below. As discussed earlier, theK-modes model generally performs better than the K-means model, therefore we select K-model (with k = 10) as our clustering method, and used its clustering results for our following forecasting approach, 
+As it’s difficult to found the optimal value of K in K-modes, we select K = 10 for K-modes to make its results comparable to K-means. The sum of squared distances of those two models can be seen from the table below. As discussed earlier, theK-modes model generally performs better than the K-means model, therefore we select K-model (with k = 10) as our clustering method, and used its clustering results for our following forecasting approach:
+
 ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/5.png
  "Optional title")
  
  ### 5.2 Forecasting model comparison: 
  ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/6.png
  "Optional title")
+ 
 The result of NNS: After clustering all items in the CorporaciónFavorita Grocery, we choose the item of 
 item_nbr:1083152 sold in 40 store as our target item, namely our test data. Then we ran the code of loop in hamming distance and found the item of item_nbr:164088 sold in 40 store has the smallest hamming distance 0.111 with the target item: 1083152, which means this item is most similar to our target item. Thus, we can predict the sale of our target item through assigning the value of the similar item to it. Finally, we calculate the mean square error in the test dataset and the value is 24288. 
  
