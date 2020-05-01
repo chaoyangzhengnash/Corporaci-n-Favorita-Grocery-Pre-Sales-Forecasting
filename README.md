@@ -45,6 +45,7 @@ The supplementary features data included several features related to the daily i
 
 ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/2.png
  "Optional title")
+Table: Usage of features selected for this project
  
 ## 4. Proposed model description 
 ### 4.1.General introduction for proposed model 
@@ -56,7 +57,7 @@ There are two noticeable point in our algorithm. First, we use the unchangeable 
 
 Further, we will clearly introduce the main models or algorithms we used. 
 
-![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/2.png
+![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/3.png
  "Optional title")
  
 ### 4.2 Benchmark model: nearest neighborhood 
@@ -77,7 +78,7 @@ The standard k-means algorithm isn't directly applicable to categorical data, fo
  
 We use the elbow plot to choose the optimal K in the proposed K-Means model.  
 
- ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/3.png
+ ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/4.png
  "Optional title")
  
 The above graph show that the “elbow” method does not work quite well in our data, and a rather smooth curve was observed, while the optimal value of K is unclear. However we may still notice that there is “big jump” in the “sun of squared distance” (though not very significant) when the value of k equals to 10, hence we select 10 as our optimal number of cluster. 
@@ -85,7 +86,7 @@ The above graph show that the “elbow” method does not work quite well in our
 ###### Clustering Model 2:  K-modes 
 The K-modes model with a section on "k-prototypes" make it an ideal model to be applied to data with a mix of categorical and numeric features. It uses a distance measure which mixes the Hamming distance for categorical features and the Euclidean distance for numeric features. 
 
-  ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/4.png
+  ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/5.png
  "Optional title")
  
 Similar to the result of K-means model, the “elbow method” also works not so well in K-modes, item_nbr:1083152 (specific) cluster as our target item, namely our test data. However, we noticed that for each value of K, the K-modes model return slightly small values compared with K-means (with on hot encoding). In other words we can conclude that in generally the K-modes model performs better than the K-means model (with one-hot encoding) in our data. 
@@ -103,11 +104,11 @@ Unlike linear regression, by neural network we want to model the non-linear rela
 ### 5.1 Clustering model comparison: 
 As it’s difficult to found the optimal value of K in K-modes, we select K = 10 for K-modes to make its results comparable to K-means. The sum of squared distances of those two models can be seen from the table below. As discussed earlier, theK-modes model generally performs better than the K-means model, therefore we select K-model (with k = 10) as our clustering method, and used its clustering results for our following forecasting approach:
 
-![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/5.png
+![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/6.png
  "Optional title")
  
  ### 5.2 Forecasting model comparison: 
- ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/6.png
+ ![Alt text](https://raw.githubusercontent.com/chaoyangzhengnash/Corporaci-n-Favorita-Grocery-Pre-Sales-Forecasting/master/graph/7.png
  "Optional title")
  
 The result of NNS: After clustering all items in the CorporaciónFavorita Grocery, we choose the item of 
